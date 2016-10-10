@@ -1,0 +1,82 @@
+[04-Oct-2015 13:43:24 America/Santiago] PHP Fatal error:  Uncaught exception 'UnexpectedValueException' with message 'Wrong number of segments' in /home/marcotor/public_html/SEA/jwt.php:35
+Stack trace:
+#0 /home/marcotor/public_html/SEA/checksession.php(14): JWT::decode('null', 'gr874AD84984reg...')
+#1 {main}
+  thrown in /home/marcotor/public_html/SEA/jwt.php on line 35
+[14-Nov-2015 11:13:58 America/Santiago] PHP Fatal error:  Uncaught exception 'UnexpectedValueException' with message 'Signature verification failed' in /home/marcotor/public_html/SEA/jwt.php:50
+Stack trace:
+#0 /home/marcotor/public_html/SEA/sea_metodos.php(68): JWT::decode('eyJ0eXAiOiJKV1Q...', 'gr874AD84984reg...')
+#1 /home/marcotor/public_html/SEA/sea_metodos.php(64): SEA->traerToken('eyJ0eXAiOiJKV1Q...')
+#2 /home/marcotor/public_html/SEA/login.php(41): SEA->__construct(Object(mysqli), 'eyJ0eXAiOiJKV1Q...')
+#3 {main}
+  thrown in /home/marcotor/public_html/SEA/jwt.php on line 50
+[14-Nov-2015 11:14:07 America/Santiago] PHP Fatal error:  Uncaught exception 'UnexpectedValueException' with message 'Signature verification failed' in /home/marcotor/public_html/SEA/jwt.php:50
+Stack trace:
+#0 /home/marcotor/public_html/SEA/sea_metodos.php(68): JWT::decode('eyJ0eXAiOiJKV1Q...', 'gr874AD84984reg...')
+#1 /home/marcotor/public_html/SEA/sea_metodos.php(64): SEA->traerToken('eyJ0eXAiOiJKV1Q...')
+#2 /home/marcotor/public_html/SEA/login.php(41): SEA->__construct(Object(mysqli), 'eyJ0eXAiOiJKV1Q...')
+#3 {main}
+  thrown in /home/marcotor/public_html/SEA/jwt.php on line 50
+[21-Nov-2015 21:27:02 America/Santiago] PHP Parse error:  syntax error, unexpected ':' in /home/marcotor/public_html/SEA/conexion.php on line 20
+[21-Nov-2015 21:27:05 America/Santiago] PHP Parse error:  syntax error, unexpected ':' in /home/marcotor/public_html/SEA/conexion.php on line 20
+[21-Nov-2015 21:27:06 America/Santiago] PHP Parse error:  syntax error, unexpected ':' in /home/marcotor/public_html/SEA/conexion.php on line 20
+[21-Nov-2015 21:27:06 America/Santiago] PHP Parse error:  syntax error, unexpected ':' in /home/marcotor/public_html/SEA/conexion.php on line 20
+[21-Nov-2015 21:27:07 America/Santiago] PHP Parse error:  syntax error, unexpected ':' in /home/marcotor/public_html/SEA/conexion.php on line 20
+[21-Nov-2015 21:27:13 America/Santiago] PHP Parse error:  syntax error, unexpected ':' in /home/marcotor/public_html/SEA/conexion.php on line 20
+[21-Nov-2015 21:27:18 America/Santiago] PHP Parse error:  syntax error, unexpected ':' in /home/marcotor/public_html/SEA/conexion.php on line 20
+[21-Nov-2015 21:40:43 America/Santiago] PHP Parse error:  syntax error, unexpected ':' in /home/marcotor/public_html/SEA/conexion.php on line 20
+[21-Nov-2015 21:40:44 America/Santiago] PHP Parse error:  syntax error, unexpected ':' in /home/marcotor/public_html/SEA/conexion.php on line 20
+[21-Nov-2015 21:40:44 America/Santiago] PHP Parse error:  syntax error, unexpected ':' in /home/marcotor/public_html/SEA/conexion.php on line 20
+[21-Nov-2015 21:40:45 America/Santiago] PHP Parse error:  syntax error, unexpected ':' in /home/marcotor/public_html/SEA/conexion.php on line 20
+[21-Nov-2015 21:40:45 America/Santiago] PHP Parse error:  syntax error, unexpected ':' in /home/marcotor/public_html/SEA/conexion.php on line 20
+[21-Nov-2015 21:40:45 America/Santiago] PHP Parse error:  syntax error, unexpected ':' in /home/marcotor/public_html/SEA/conexion.php on line 20
+[18-May-2016 12:28:46 America/Santiago] PHP Fatal error:  Uncaught exception 'UnexpectedValueException' with message 'Wrong number of segments' in /home/marcotor/public_html/SEA/jwt.php:35
+Stack trace:
+#0 /home/marcotor/public_html/SEA/checksession.php(14): JWT::decode('null', 'gr874AD84984reg...')
+#1 {main}
+  thrown in /home/marcotor/public_html/SEA/jwt.php on line 35
+[13-Jul-2016 02:54:50 America/Santiago] PHP Fatal error:  Uncaught exception 'UnexpectedValueException' with message 'Wrong number of segments' in /home/marcotor/public_html/SEA/jwt.php:35
+Stack trace:
+#0 /home/marcotor/public_html/SEA/checksession.php(14): JWT::decode('null', 'gr874AD84984reg...')
+#1 {main}
+  thrown in /home/marcotor/public_html/SEA/jwt.php on line 35
+[13-Jul-2016 02:54:50 America/Santiago] PHP Fatal error:  Uncaught exception 'UnexpectedValueException' with message 'Wrong number of segments' in /home/marcotor/public_html/SEA/jwt.php:35
+Stack trace:
+#0 /home/marcotor/public_html/SEA/checksession.php(14): JWT::decode('null', 'gr874AD84984reg...')
+#1 {main}
+  thrown in /home/marcotor/public_html/SEA/jwt.php on line 35
+[13-Jul-2016 02:54:51 America/Santiago] PHP Fatal error:  Uncaught exception 'UnexpectedValueException' with message 'Wrong number of segments' in /home/marcotor/public_html/SEA/jwt.php:35
+Stack trace:
+#0 /home/marcotor/public_html/SEA/checksession.php(14): JWT::decode('null', 'gr874AD84984reg...')
+#1 {main}
+  thrown in /home/marcotor/public_html/SEA/jwt.php on line 35
+[13-Jul-2016 02:54:51 America/Santiago] PHP Fatal error:  Uncaught exception 'UnexpectedValueException' with message 'Wrong number of segments' in /home/marcotor/public_html/SEA/jwt.php:35
+Stack trace:
+#0 /home/marcotor/public_html/SEA/checksession.php(14): JWT::decode('null', 'gr874AD84984reg...')
+#1 {main}
+  thrown in /home/marcotor/public_html/SEA/jwt.php on line 35
+[13-Jul-2016 02:54:51 America/Santiago] PHP Fatal error:  Uncaught exception 'UnexpectedValueException' with message 'Wrong number of segments' in /home/marcotor/public_html/SEA/jwt.php:35
+Stack trace:
+#0 /home/marcotor/public_html/SEA/checksession.php(14): JWT::decode('null', 'gr874AD84984reg...')
+#1 {main}
+  thrown in /home/marcotor/public_html/SEA/jwt.php on line 35
+[13-Jul-2016 02:54:51 America/Santiago] PHP Fatal error:  Uncaught exception 'UnexpectedValueException' with message 'Wrong number of segments' in /home/marcotor/public_html/SEA/jwt.php:35
+Stack trace:
+#0 /home/marcotor/public_html/SEA/checksession.php(14): JWT::decode('null', 'gr874AD84984reg...')
+#1 {main}
+  thrown in /home/marcotor/public_html/SEA/jwt.php on line 35
+[13-Jul-2016 02:54:52 America/Santiago] PHP Fatal error:  Uncaught exception 'UnexpectedValueException' with message 'Wrong number of segments' in /home/marcotor/public_html/SEA/jwt.php:35
+Stack trace:
+#0 /home/marcotor/public_html/SEA/checksession.php(14): JWT::decode('null', 'gr874AD84984reg...')
+#1 {main}
+  thrown in /home/marcotor/public_html/SEA/jwt.php on line 35
+[13-Jul-2016 02:54:52 America/Santiago] PHP Fatal error:  Uncaught exception 'UnexpectedValueException' with message 'Wrong number of segments' in /home/marcotor/public_html/SEA/jwt.php:35
+Stack trace:
+#0 /home/marcotor/public_html/SEA/checksession.php(14): JWT::decode('null', 'gr874AD84984reg...')
+#1 {main}
+  thrown in /home/marcotor/public_html/SEA/jwt.php on line 35
+[13-Jul-2016 02:54:52 America/Santiago] PHP Fatal error:  Uncaught exception 'UnexpectedValueException' with message 'Wrong number of segments' in /home/marcotor/public_html/SEA/jwt.php:35
+Stack trace:
+#0 /home/marcotor/public_html/SEA/checksession.php(14): JWT::decode('null', 'gr874AD84984reg...')
+#1 {main}
+  thrown in /home/marcotor/public_html/SEA/jwt.php on line 35

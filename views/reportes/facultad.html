@@ -1,0 +1,126 @@
+<!--Reportes Facultad-->
+<img class="spin" src="images/spinner.gif" ng-show="sending">
+<nav class="navbar navbar-default" role="navigation">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-reportes">
+			<span class="sr-only">Desplegar navegacion</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand">Periodos</a>
+	</div>
+
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-reportes">
+		<ul class="nav navbar-nav">
+			<li><a href="" ng-click="reload()"><span class="glyphicon glyphicon-refresh"></span> Refrscar</a></li>
+		</ul>
+		<ul class="pull-right">
+			<div class="row">
+				<p class="pull-right font-white"><input type="checkbox" ng-model="checkboxModel.value">Subir Archivo</p>
+			</div>
+			<div class="row">
+				<input ng-show="checkboxModel.value" class="font-white" type="file" file-model="myFile"/>
+			</div>
+		</ul>
+	</div><!-- /.navbar-collapse -->
+
+
+
+	<!--<nav class="navbar navbar-default" role="navigation">-->
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+				<input type="text" class="form-control" placeholder="Buscar Periodo" ng-model="buscar.inicio" ng-click="curPage=0">
+			</div>
+		</div><!--panel-heading-->
+		<div class="panel-body">
+			<table class="table table-hover table-striped">
+				<thead>
+					<tr>
+
+						<th>
+							<b style="cursor: pointer" ng-click="ordenarPor('inicio')">Año</b>
+							<span class="caret" style="cursor: pointer" ng-click="ordenarPor('-inicio')" ></span>
+						</th>
+
+							<!--<th><b ng-click="ordenarPor('fin')">
+								Fin</b></th>-->
+
+							<!--	<th><b ng-click="ordenarPor('estado')">
+							Estado</b></th>-->
+
+							<th><b>PDF</b></th>
+
+							<th><b>Excel</b></th>
+
+							<th><b>Ver Firmas</b></th>
+
+							<th ng-show="checkboxModel.value"><b>Subir</b></th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="periodo in periodos | orderBy:ordenSeleccionado | filter:buscar |  pagination: curPage * pageSize | limitTo: pageSize">
+							<td>  {{periodo.inicio}}</td>
+							<!--<td>{{periodo.fin}}</td>-->
+							<!--<td>{{periodo.estado}}</td>-->
+							<td><button ng-disabled="sending" class="btn btn-default" ng-click="imprimirEvaluaciones(periodo, true)"><span class="glyphicon glyphicon-paste"></span></button></td>
+
+							<td><button ng-disabled="sending" class="btn btn-success" ng-click="imprimirEvaluaciones(periodo, false)">exc</button></td>
+
+							<td><button ng-disabled="sending" class="btn btn-warning" ng-click="bajarEvidencia(periodo)"><span class="glyphicon glyphicon-download"></span></button></td>
+
+							<td ng-show="checkboxModel.value"><button ng-disabled="sending" class="btn btn-danger" ng-click="subirEvidencia(periodo)"><span class="glyphicon glyphicon-upload"></span></button></td>
+
+						</tr>
+					</tbody>
+				</table>
+				<img class="spin" src="images/spinner.gif" ng-show="showSpinner">
+			</div>
+		</div>
+
+		<div class="pagination-div" ng-show="periodos.length>5" style="text-align: center">
+			<ul>
+				<button class="btn btn-default btn-sm" ng-disabled="curPage == 0"
+				ng-click="curPage=0"> <span class="glyphicon glyphicon-step-backward"></span> </button>
+
+				<button class="btn btn-default btn-sm" ng-disabled="curPage == 0"
+				ng-click="curPage=curPage-1"> <span class="glyphicon glyphicon-triangle-left"></span> </button>
+
+				<span>Página {{curPage + 1}} de {{ numberOfPages() }}</span>
+
+				<button class="btn btn-default btn-sm"
+				ng-disabled="curPage >= periodos.length/pageSize - 1"
+				ng-click="curPage = curPage+1"> <span class="glyphicon glyphicon-triangle-right"></span> </button>
+
+				<button class="btn btn-default btn-sm" ng-disabled="curPage == numberOfPages()-1"
+				ng-click="curPage=numberOfPages()-1"> <span class="glyphicon glyphicon-step-forward"></span> </button>
+
+			</ul>
+		</div>
+		<!--</nav>-->
+	</nav>
+	<div class="form-crud top-buffer">
+		<div class="row row-height">
+			<div class="col-md-3">
+				<div class="inside">
+					<h3>Periodo Actual</h3>
+				</div>
+			</div>
+			<div class="col-md-1">
+				<div class="inside">
+					<button ng-disabled="sending" class="btn btn-danger" ng-click="imprimirEvaluaciones(flase, true)">PDF</button>
+				</div>
+			</div>
+			<div class="col-md-1">
+				<div class="inside">
+					<button ng-disabled="sending" class="btn btn-success" ng-click="imprimirEvaluaciones(false, false)">exc</button>
+				</div>
+			</div>
+				
+			</div>
+		</div>
+	</div>

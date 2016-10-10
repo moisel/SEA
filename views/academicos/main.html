@@ -1,0 +1,132 @@
+<!--Academicos main-->
+<nav class="navbar navbar-default" role="navigation">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-academicos">
+			<span class="sr-only">Desplegar navegacion</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand">Academicos</a>
+	</div>
+
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-academicos">
+		<ul class="nav navbar-nav">
+			<li><a href="#/academicos/nuevo/"><span class="glyphicon glyphicon-plus agregarIcon"></span> Nuevo Academco</a></li>
+			<li><a href="" ng-disabled="showSpinner" ng-click="reload()"><span class="glyphicon glyphicon-refresh"></span> Refrscar</a></li>
+		</ul>
+	</div><!-- /.navbar-collapse -->
+
+
+
+<!--<nav class="navbar navbar-default" role="navigation">-->
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+				<input type="text" class="form-control" placeholder="Buscar Academico" ng-model="buscar" ng-click="curPage=0">
+			</div>
+			
+			<label>
+			<input type="radio" ng-model="mostrar.estado" value="ACTIVO" ng-change="filtrar.estricto=true">
+				Activos
+			</label>
+
+			<label>
+			<input type="radio" ng-model="mostrar.estado" ng-change="filtrar.estricto=false">
+				Todos
+			</label>
+			
+			<label>
+			<input type="radio" ng-model="mostrar.estado" value="INACTIVO" ng-change="filtrar.estricto=true">
+				Inactivos
+			</label>
+
+
+		</div><!--panel-heading-->
+			<div class="panel-body">
+				<table class="table table-hover table-striped">
+					<thead>
+						<tr>
+
+							<th><b ng-click="ordenarPor('rut')">
+							Rut</b></th>
+
+							<th><b ng-click="ordenarPor('nombres')">
+							Nombre(s)</b></th>
+
+							<th><b ng-click="ordenarPor('apellidos')">
+							Apellido(s)</b></th>
+
+							<th ng-hide="hide.adminContent"><b ng-click="ordenarPor('cod_facultad')">
+							Facultad</b></th>
+
+							<th class="hidden-xs"><b ng-click="ordenarPor('cod_departamento')">
+							Departamento</b></th>
+
+							<th class="hidden-xs"><b ng-click="ordenarPor('tituloprofesional')">
+							Título Profesional</b></th>
+
+							<!--<th><b ng-click="ordenarPor('horas')">
+							Horas</b></th>-->
+
+							<!--<th><b ng-click="ordenarPor('categoria')">
+							Categoría</b></th>-->
+
+							<!--<th><b ng-click="ordenarPor('gradoAcademico')">
+							Grado Académico</b></th>-->
+
+							<!--<th><b ng-click="ordenarPor('tipoPlanta')">
+							Tipo Planta</b></th>-->
+
+							<th><b ng-click="ordenarPor('estado')">
+							Estado</b></th>
+							<th><b>Editar</b></th>
+							<!--<th><b>Ult.Ev</b></th>-->
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="academico in academicos | orderBy:ordenSeleccionado | filter:buscar | filter:mostrar:filtrar.estricto | pagination: curPage * pageSize | limitTo: pageSize">
+							<td>{{academico.rut | rut}}</td>
+							<td>{{academico.nombres}}</td>
+							<td>{{academico.apellidos}}</td>
+							<td ng-hide="hide.adminContent">{{array.facultades[academico.cod_facultad]}}</td>
+							<td class="hidden-xs">{{array.departamentos[academico.cod_departamento]}}</td>
+							<td class="hidden-xs">{{academico.tituloProfesional}}</td>
+							<!--<td>{{academico.horas}}</td>-->
+							<!--<td>{{academico.categoria}}</td>-->
+							<!--<td>{{academico.gradoAcademico}}</td>-->
+							<!--<td>{{academico.tipoPlanta}}</td>-->
+							<td>{{academico.estado}}</td>
+							<td><button class="btn btn-default" ng-click="editar(academico)"><span class="glyphicon glyphicon-edit"></span></button></td>
+							<!--<td><button class="btn btn-default" ng-click="asPDF(academico)"><span class="glyphicon glyphicon-paste"></span></button></td>-->
+						</tr>
+					</tbody>
+				</table>
+				<img class="spin" src="images/spinner.gif" ng-show="showSpinner">
+			</div>
+		</div><!--panel panel-default-->
+
+		<div class="pagination-div" ng-show="academicos.length>5" style="text-align: center">
+			<ul>
+				<button class="btn btn-default btn-sm" ng-disabled="curPage == 0"
+				ng-click="curPage=0"> <span class="glyphicon glyphicon-step-backward"></span> </button>
+
+				<button class="btn btn-default btn-sm" ng-disabled="curPage == 0"
+				ng-click="curPage=curPage-1"> <span class="glyphicon glyphicon-triangle-left"></span> </button>
+
+				<span>Página {{curPage + 1}} de {{ numberOfPages() }}</span>
+
+				<button class="btn btn-default btn-sm"
+				ng-disabled="curPage >= academicos.length/pageSize - 1"
+				ng-click="curPage = curPage+1"> <span class="glyphicon glyphicon-triangle-right"></span> </button>
+
+				<button class="btn btn-default btn-sm" ng-disabled="curPage == numberOfPages()-1"
+				ng-click="curPage=numberOfPages()-1"> <span class="glyphicon glyphicon-step-forward"></span> </button>
+
+			</ul>
+		</div>
+</nav>

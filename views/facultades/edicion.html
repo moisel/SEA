@@ -1,0 +1,38 @@
+<!--
+*HTML
+*Facultades 
+*Edición
+-->
+<form class="form-crud" role="form" name="forma">
+  <div class="form-title">Editar Facultad: {{datafactory.nombre}}</div>
+  <div class="row">
+    <div class="col-md-8" ng-class="{'has-error': forma.anioComision.$invalid && !forma.anioComision.$pristine }">
+      <label for="inputNombre">Nombre</label>
+      <div class="input-group">
+        <input ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ\.]*$/" id="inputNombre" ng-maxlength="60" type="text" class="form-control" placeholder="Nombre de la Facultad" name="anioComision" ng-model="datafactory.nombre" required>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+      </div>
+      <b ng-show="forma.anioComision.$invalid && !forma.anioComision.$pristine && !forma.anioComision.$error.pattern"
+      class="help-block">El campo Nombre es oblgatorio.</b>
+      <b ng-show="forma.anioComision.$error.pattern" class="help-block">El campo Nombre contiene caracteres inválidos</b>
+    </div>
+  </div><!--row-->
+  <div class="row">
+
+    <div class="col-md-8" ng-class="{'has-error': forma.facultadComision.$invalid && forma.facultadComision.$dirty}">
+     <label for="inputDecano">Decano</label>
+      <input ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ\.]*$/" id="inputDecano" ng-maxlength="60" type="text" class="form-control" placeholder="Decano" name="facultadComision" ng-model="datafactory.decano">
+      <b ng-show="forma.facultadComision.$error.pattern" class="help-block">El campo Decano contiene caracteres inválidos</b>
+  </div>
+  <div class="col-md-2">
+   <label for="InputEstado">Estado</label>
+   <div class="input-group">
+    <span class="input-group-addon"><span class="glyphicon glyphicon-adjust"></span></span>
+    <select class="form-control" id="estado" ng-model="datafactory.estado" ng-options="estado for estado in estados"></select>
+  </div>
+</div>
+</div><!--row-->
+<ed-guardar></ed-guardar>
+<img class="spin" src="images/spinner.gif" ng-show="sending">
+</form>
+

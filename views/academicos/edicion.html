@@ -1,0 +1,113 @@
+<!--
+*HTML
+*Academicos 
+*Edición
+-->
+
+<form class="form-crud" role="form" name="forma">
+ <div class="form-title" >Editar Academico: {{datafactory.nombres}} {{datafactory.apellidos}} Rut: {{datafactory.rut | rut}}</div>
+ <div class="row">
+   <div class="col-md-6" ng-class="{'has-error': forma.nombreAcademico.$invalid && !forma.nombreAcademico.$pristine }">
+    <label for="inputNombre">Nombre</label>
+    <div class="input-group">
+      <input name="nombreAcademico" id="inputNombre" ng-maxlength="25" type="text" ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ]*$/"
+      class="form-control" placeholder="Nombre(s)" ng-model="datafactory.nombres" required>
+      <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+    </div>
+    <b ng-show="forma.nombreAcademico.$invalid && !forma.nombreAcademico.$pristine && !forma.nombreAcademico.$error.pattern"
+    class="help-block">El campo Nombre es oblgatorio.</b>
+    <b ng-show="forma.nombreAcademico.$error.pattern" class="help-block">El campo Nombre contiene caracteres inválidos</b>
+  </div>
+
+  <div class="col-md-6" ng-class="{'has-error': forma.apellidoAcademico.$invalid && !forma.apellidoAcademico.$pristine }">
+    <label for="inputApellido">Apellido</label>
+    <div class="input-group">
+      <input name="apellidoAcademico" id="inputApellido" ng-maxlength="25" type="text" ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ]*$/"
+      class="form-control" placeholder="Apellido(s)" ng-model="datafactory.apellidos" required>
+      <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+    </div>
+    <b ng-show="forma.apellidoAcademico.$invalid && !forma.apellidoAcademico.$pristine && !forma.apellidoAcademico.$error.pattern"
+    class="help-block">El campo Apellido es oblgatorio.</b>
+    <b ng-show="forma.apellidoAcademico.$error.pattern" class="help-block">El campo Apellido contiene caracteres inválidos</b>
+  </div>
+
+</div><!--row-->
+<div class="row">
+
+  <div class="col-md-6" ng-class="{'has-error': forma.tituloAcademico.$invalid && !forma.tituloAcademico.$pristine}">
+    <label for="inputTitulo">Título Profesional</label>
+    <input name="tituloAcademico" id="inputTitulo" ng-maxlength="60" type="text" ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ\.]*$/"
+    class="form-control" placeholder="Titulo Profesional" ng-model="datafactory.tituloProfesional">
+    <b ng-show="forma.tituloAcademico.$error.pattern" class="help-block">El campo Título Profesional contiene caracteres inválidos</b>
+  </div>
+
+  <div class="col-md-6" ng-class="{'has-error': forma.gradoAcademico.$invalid && !forma.gradoAcademico.$pristine}">
+    <label for="inputGrado">Grado Académico</label>
+    <input name="gradoAcademico" id="inputGrado" ng-maxlength="25" type="text" ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ]*$/"
+    class="form-control" placeholder="Grado Académico" ng-model="datafactory.gradoAcademico"></input>
+    <b ng-show="forma.gradoAcademico.$error.pattern" class="help-block">El campo Grado Académico contiene caracteres inválidos</b>
+
+  </div>
+
+</div><!--row-->
+<div class="row">
+
+
+  <div ng-hide="hide.adminContent" class="col-md-6">
+    <label class="label-white" for="selectFacultad">Facultad</label>
+    <div class="input-group">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-adjust"></span></span>
+      <select name="facultadDepartamento" id="selectFacultad" ng-model="changer.facultad" class="form-control" ng-options="facultad for facultad in facultadesSeleccion" ng-change="cambiarCodFacultad(changer.facultad)">
+      </select>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <label class="label-white" for="selectDepartamento">Departamento</label>
+    <div class="input-group">
+     <span class="input-group-addon"><span class="glyphicon glyphicon-adjust"></span></span>
+     <select name="departamentoAcademico" id="selectDepartamento" class="form-control"  ng-model="changer.departamento" ng-options="departamento for departamento in departamentosSeleccion" ng-change="cambiarCodDepartamento(changer.departamento)">
+     </select>
+   </div>
+ </div>
+
+</div><!--row-->
+<div class="row">
+
+  <div class="col-md-2">
+    <label for="InputCategoria">Categoría</label>
+    <div class="input-group">
+     <span class="input-group-addon"><span class="glyphicon glyphicon-adjust"></span></span>
+     <select name="categoriaAcademico" id="categoria" class="form-control"  ng-model="datafactory.categoria" ng-options="categoria for categoria in categorias">
+     </select>
+   </div>
+ </div>
+
+ <div class="col-md-2" ng-class="{'has-error': forma.horasAcademico.$invalid, 'has-success': forma.horasAcademico.$valid && !forma.horasAcademico.$pristine}">
+  <label for="inputHoras">Horas</label>
+  <input name="horasAcademico" id="inputHoras" ng-maxlength="2" type="number" min="0" max="44"
+  class="form-control" placeholder="Máximo 44" ng-model="datafactory.horas">
+  <b ng-show="forma.horasAcademico.$error.min" class="help-block">Las horas no pueden ser negativas</b>
+  <b ng-show="forma.horasAcademico.$error.max" class="help-block">No se pueden superar las 44 horas</b>
+</div>
+
+
+
+<div class="col-md-2" ng-class="{'has-error': forma.tipoPlantaAcademico.$invalid && !forma.tipoPlantaAcademico.$pristine}">
+  <label for="inputTipoPlanta">Tipo Planta</label>
+  <input name="tipoPlantaAcademico" id="inputTipoPlanta" ng-maxlength="25" type="text" ng-pattern="/^[a-zA-Z0-9° ñáéíóú]*$/"
+  class="form-control" placeholder="El tipo de Planta" ng-model="datafactory.tipoPlanta">
+  <b ng-show="forma.tipoPlantaAcademico.$error.pattern" class="help-block">El campo Tipo Planta contiene caracteres inválidos</b>
+</div>
+<div class="col-md-2">
+  <label for="InputEstado">Estado</label>
+  <div class="input-group">
+    <span class="input-group-addon"><span class="glyphicon glyphicon-adjust"></span></span>
+    <select class="form-control" id="estado" ng-model="datafactory.estado" ng-options="estado for estado in estados"></select>
+  </div>
+</div>
+</div><!--row-->
+<!--<ed-guardar></ed-guardar>-->
+<ed-guardar></ed-guardar>
+<img class="spin" src="images/spinner.gif" ng-show="sending">
+</form>

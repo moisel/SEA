@@ -1,0 +1,73 @@
+<!--
+*HTML
+*Comisiones 
+*Nuevo
+-->
+
+
+<form class="form-crud" role="form" name="forma">
+	<div class="form-title" >Nueva Comisión</div>
+	<div class="row">
+		<div class="col-md-6" ng-class="{'has-error': forma.anioComision.$invalid && !forma.anioComision.$pristine }">
+			<label for="inputAnio">Año</label>
+			<div class="input-group">
+				<input ng-pattern="/^[0-9]*$/" id="inputAnio" ng-maxlength="20" type="text" class="form-control" placeholder="Año en que la comisión evalúa" name="anioComision" ng-model="comision.anio" required>
+				<span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+			</div>
+			<b ng-show="forma.anioComision.$invalid && !forma.anioComision.$pristine && !forma.anioComision.$error.pattern" class="help-block">El campo Año es oblgatorio.</b>
+			<b ng-show="forma.anioComision.$error.pattern" class="help-block">El campo Año contiene caracteres inválidos</b>
+		</div>
+
+		<div class="col-md-6">
+			<label for="inputFechaPie">Fecha Pie</label>
+			<div class="input-group">
+				<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+				<input id="inputFechaPie" ng-maxlength="10" type="date" class="form-control" placeholder="Fecha Pie" name="fechaPieComision" ng-model="comision.fechaPie" >
+			</div>
+		</div>
+
+	</div><!--row-->
+	<div class="row">	
+		<div class="col-md-6" ng-class="{'has-error': forma.rutComision.$invalid && !forma.rutComision.$pristine }">
+			<label for="inputRut">Rut</label>
+			<input ng-pattern="/^[0-9kK\.-]*$/" id="inputRut" ng-maxlength="20" type="text" class="form-control" placeholder="Rut" name="rutComision" ng-model="comision.rut">
+			<b ng-show="forma.rutComision.$error.pattern" class="help-block">El campo Año contiene caracteres inválidos</b>
+		</div>
+
+		<div class="col-md-6"  ng-class="{'has-error': forma.decanoComision.$invalid && !forma.decanoComision.$pristine }">
+			<label for="inputDecano">Decano</label>
+			<input ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ]*$/" id="inputDecano" ng-maxlength="60" type="text" class="form-control" placeholder="Decano" name="decanoComision" ng-model="comision.decano" >
+			<b ng-show="forma.decanoComision.$error.pattern" class="help-block">El campo Decano contiene caracteres inválidos</b>
+		</div>
+	</div><!--row-->
+	<div class="row">	
+
+		<div class="col-md-6" ng-class="{'has-error': forma.miembro1Comision.$invalid && !forma.miembro1Comision.$pristine }">
+			<label for="inputMiembro1">Miembro Uno</label>
+			<input ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ]*$/" id="inputMiembro1" ng-maxlength="60" type="text" class="form-control" placeholder="Miembro 1" name="miembro1Comision" ng-model="comision.miembro1" >
+			<b ng-show="forma.miembro1Comision.$error.pattern" class="help-block">El campo Miembro Uno contiene caracteres inválidos</b>
+		</div>
+
+		<div class="col-md-6" ng-class="{'has-error': forma.miembro2Comision.$invalid && !forma.miembro2Comision.$pristine }">
+			<label for="inputMiembro2">Miembro Dos</label>
+			<input ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ]*$/" id="inputMiembro2" ng-maxlength="60" type="text" class="form-control" placeholder="Miembro2" name="miembro2Comision" ng-model="comision.miembro2">
+			<b ng-show="forma.miembro2Comision.$error.pattern" class="help-block">El campo Miembro Dos contiene caracteres inválidos</b>
+		</div>
+	</div><!--row-->
+	<div class="row">	
+		<div ng-hide="hide.adminContent" class="col-md-6">
+			<label class="label-white" for="selectFacultad">Facultad</label>
+			<div class="input-group">
+				<span class="input-group-addon"><span class="glyphicon glyphicon-adjust"></span></span>
+				<select name="facultadDepartamento" id="selectFacultad" ng-model="changer.facultad" class="form-control" ng-options="facultad for facultad in facultadesSeleccion" ng-change="cambiarCodFacultad(changer.facultad)">
+				</select>
+			</div>
+		</div>
+	</div><!--row-->
+
+	<ed-agregar></ed-agregar>
+	<img class="spin" src="images/spinner.gif" ng-show="sending">
+</form>
+
+
+

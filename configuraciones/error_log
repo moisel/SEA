@@ -1,0 +1,16 @@
+[13-Jul-2016 02:54:52 America/Santiago] PHP Fatal error:  Uncaught exception 'UnexpectedValueException' with message 'Wrong number of segments' in /home/marcotor/public_html/SEA/jwt.php:35
+Stack trace:
+#0 /home/marcotor/public_html/SEA/sea_metodos.php(68): JWT::decode('null', 'gr874AD84984reg...')
+#1 /home/marcotor/public_html/SEA/sea_metodos.php(64): SEA->traerToken('null')
+#2 /home/marcotor/public_html/SEA/configuraciones/periodo_metodos.php(5): SEA->__construct(Object(mysqli), 'null')
+#3 /home/marcotor/public_html/SEA/configuraciones/periodos.php(18): Periodo->__construct(Object(mysqli), 'null')
+#4 {main}
+  thrown in /home/marcotor/public_html/SEA/jwt.php on line 35
+[13-Jul-2016 02:54:52 America/Santiago] PHP Fatal error:  Uncaught exception 'UnexpectedValueException' with message 'Wrong number of segments' in /home/marcotor/public_html/SEA/jwt.php:35
+Stack trace:
+#0 /home/marcotor/public_html/SEA/sea_metodos.php(68): JWT::decode('null', 'gr874AD84984reg...')
+#1 /home/marcotor/public_html/SEA/sea_metodos.php(64): SEA->traerToken('null')
+#2 /home/marcotor/public_html/SEA/configuraciones/periodo_metodos.php(5): SEA->__construct(Object(mysqli), 'null')
+#3 /home/marcotor/public_html/SEA/configuraciones/periodos.php(18): Periodo->__construct(Object(mysqli), 'null')
+#4 {main}
+  thrown in /home/marcotor/public_html/SEA/jwt.php on line 35

@@ -1,0 +1,48 @@
+<!--
+*HTML
+*Departamentos 
+*Edición
+-->
+
+<form class="form-crud" role="form" name="forma">
+  <div class="form-title">Editar Departamento: {{datafactory.nombre}}</div>
+
+  <div class="row">
+
+    <div class="col-md-8" ng-class="{'has-error': forma.anioComision.$invalid && !forma.anioComision.$pristine }">
+      <label for="inputNombre">Nombre</label>
+      <div class="input-group">
+        <input ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ]*$/" id="inputNombre" ng-maxlength="60" type="text" class="form-control" placeholder="Nombre del departamento" name="anioComision" ng-model="datafactory.nombre" required>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+      </div>
+      <b ng-show="forma.anioComision.$invalid && !forma.anioComision.$pristine && !forma.anioComision.$error.pattern" class="help-block">El campo Nombre es oblgatorio.</b>
+      <b ng-show="forma.anioComision.$error.pattern" class="help-block">El campo Nombre contiene caracteres inválidos</b>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div ng-hide="hide.adminContent" class="col-md-8">
+      <label class="label-white" for="selectFacultad">Facultad</label>
+      <div class="input-group">
+       <span class="input-group-addon"><span class="glyphicon glyphicon-adjust"></span></span>
+       <select name="facultadSelect" id="selectFacultad" class="form-control"  ng-model="changer.facultad" ng-options="facultad for facultad in facultadesSeleccion" ng-change="cambiarCodFacultad(changer.facultad)">
+       </select>
+     </div>
+     
+   </div>
+
+   <div class="col-md-2">
+    <label for="InputEstado">Estado</label>
+    <div class="input-group">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-adjust"></span></span>
+      <select class="form-control" id="estado" ng-model="datafactory.estado" ng-options="estado for estado in estados"></select>
+    </div>
+  </div>
+
+  </div><!--row-->
+
+  <ed-guardar></ed-guardar>
+  <img class="spin" src="images/spinner.gif" ng-show="sending">
+</form>

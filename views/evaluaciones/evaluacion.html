@@ -1,0 +1,154 @@
+<!--Academicos evaluacion-->
+
+<!--<button class="btn btn-danger" id="cmd" ng-click="asPDF()">PDF</button>-->
+
+
+<!--<nav class="navbar" role="navigation">recuadro-->
+<legend>Realizando evaluación: {{academico.nombres}} {{academico.apellidos}}</legend>
+
+<div class="panel panel-info">
+  <div class="panel-heading" data-toggle="collapse" data-target="#identificacion">Identificación</div>
+  <div class="collapse panel-body" id="identificacion">
+    <div class="table-content">
+      <div class="panel-body">
+        <table class="table table-bordered">
+      <thead></thead><!--si no comienza con un thead, se invierte la primera
+      con la segunda fila-->
+      <tbody>
+        <tr>
+          <td>{{academico.nombres}} {{academico.apellidos}}</td>
+          <td>{{nombres.nombreDepartamento}}</td>
+        </tr>
+      </tbody>
+
+      <thead>
+        <tr class="active">
+          <th>Académico</th>
+          <th>Departamento</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>{{nombres.nombreFacultad}}</td>
+          <td>ACTUAL</td>
+        </tr>
+      </tbody>
+
+      <thead>
+        <tr class="active">
+          <th>Facultad o Instituto al que pertenece</th>
+          <th>Período que se evalúa</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>{{academico.tituloProfesional}}</td>
+          <td>{{academico.horas}}</td>
+        </tr>
+      </tbody>
+
+      <thead>
+        <tr class="active">
+          <th>Título Profesional</th>
+          <th>Horas de Contrato</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>{{academico.categoria}}</td>
+          <td>{{academico.gradoAcademico}}</td>
+        </tr>
+      </tbody>
+
+      <thead>
+        <tr class="active">
+          <th>Categoría</th>
+          <th>Grado Académico</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>{{academico.calificacionAnterior}}</td>
+          <td>{{academico.tipoPlanta}}</td>
+        </tr>
+      </tbody>
+
+      <thead>
+        <tr class='active'>
+          <th>Calificación Anterior</th>
+          <th>Tipo de Planta</th>
+        </tr>
+      </thead>
+
+
+    </table>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+<div class="panel panel-info">
+  <div class="panel-heading" data-toggle="collapse" data-target="#calificacionAcademica">Calificación Academica</div>
+  <div class="collapse panel-body" id="calificacionAcademica">
+    <table class="table table-bordered">
+      <tr class="column-label">
+        <td></td>
+        <td ng-repeat="column in columns">{{column}}</td>
+      </tr>
+      <tr ng-repeat="row in rows">
+        <td class="row-label">{{row}}</td>
+        <td ng-repeat="column in columns">
+          <ng-form name="forma" role="form">
+          <div ng-class="{'has-error': forma.celda.$invalid && !forma.celda.$pristine }">
+            <input ng-bind="validar(forma.celda.$invalid, !forma.celda.$pristine, column, row)" name="celda" ng-pattern="/^[0-9\.]*$/" type = "text" disable-arrows class="form form-control" ng-model="cells[column+row]" ng-blur="move(column, row)"></input>
+            <div ng-bind="compute(row)" ></div>
+            <div ng-bind="calcularNotaFinal()" ></div>
+          </div>
+        </ng-form>
+      </td>
+    </tr>
+  </table>
+  <!--</div><!--collapse panel-body-->
+  <!--</div><!--panel panel-info-->
+
+
+
+  <div class="form-crud" style="text-align: center">
+    <h3>Nota: {{nota}} - {{escala}}</h3>
+    <h4>ESCALA: Excelente = 4,5 a 5 Muy Bueno = 4,0 a 4,4 Bueno = 3,5 a 3,9 
+      <br>
+      Regular = 3,4 a 2,7  Deficiente = menos de 2,7  </h4>
+    </div>
+  </div>
+</div><!--collapse panel-body-->
+</div><!--panel panel-info-->
+
+
+<div class="panel panel-info">
+<div class="panel-heading" data-toggle="collapse" data-target="#argumentos">Argumentos de la Calificación Final</div>
+  <div id="argumentos" class="collapse panel-body">
+    <form role="form" name="forma" ng-class="{'has-error': forma.textArea.$error.pattern && forma.textArea.$dirty }">
+      <textarea ng-maxlength="250" name="textArea" ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ\.-]*$/" class="form-control" rows="3" ng-model="evaluacion.argumento"></textarea>
+      <b ng-show="forma.textArea.$error.pattern">El Campo Argumento Contiene caracteres inválidos</b>
+    </form>
+  </div><!--argumentos-->
+</div><!--panel panel-info-->
+
+<div class="panel panel-info">
+    <div class="panel-body">
+      <div class="col-md-4"><h3>Miembro uno: {{comision.miembro1}}</h3></div>
+      <div class="col-md-4"><h3>Decano: {{comision.decano}}</h3></div>
+      <div class="col-md-4"><h3>Miembro dos: {{comision.miembro2}}</h3></div>
+    </div>
+</div>
+
+<button ng-disabled="sending || forma.$invalid" class="btn btn-default" ng-click="evaluar()">Enviar Evaluación</button>
+<img class="spin" src="images/spinner.gif" ng-show="sending">
+
+

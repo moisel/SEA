@@ -1,0 +1,29 @@
+
+<div class="form-crud top-buffer">
+	<div class="row row-height">
+		<div class="col-md-2">
+			<div class="inside">
+				<label for="InputPeriodo">Año a Evaluar</label>
+				<div class="input-group">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-adjust"></span></span>
+					<select class="form-control" id="inicioPeriodo" ng-model="periodo.inicio" ng-options="anio for anio in ages"></select>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2 top-buffer">
+			<div class="inside">
+				<button class="btn btn-success" ng-disabled="sending" ng-click="iniciarPeriodo()">Iniciar Periodo</button>
+			</div>
+		</div>
+
+		<div class="col-md-2 top-buffer">
+			<div class="inside">
+				<button class="btn btn-danger" ng-disabled="sending" ng-click="finalizarPeriodo()">Finalizar Periodo</button>
+			</div>
+		</div><!--row-->
+
+		<div class="row">
+			<img class="spin" src="images/spinner.gif" ng-show="sending">
+		</div>
+	</div>
+</div>

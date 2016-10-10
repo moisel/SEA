@@ -1,0 +1,141 @@
+<!--Comisiones Main-->
+
+
+<nav class="navbar navbar-default" role="navigation"> 
+
+
+ <!-- Brand and toggle get grouped for better mobile display -->
+
+ <div class="navbar-header">
+  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-3">
+   <span class="sr-only">Desplegar navegacion</span>
+   <span class="icon-bar"></span>
+   <span class="icon-bar"></span>
+   <span class="icon-bar"></span>
+ </button>
+ <a class="navbar-brand">Comisiones</a>
+</div>
+
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-3">
+ <ul class="nav navbar-nav">
+  <li><a href="#/comisiones/nuevo/"><span class="glyphicon glyphicon-plus agregarIcon"></span> Nueva Comisión</a></li>
+  <li><a href="" ng-click="reload()"><span class="glyphicon glyphicon-refresh"></span> Refrscar</a></li>
+</ul>
+</div><!-- /.navbar-collapse -->
+
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+   <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+    <input type="text" class="form-control" placeholder="Búsqueda global" ng-model="buscar" ng-click="curPage=0">   
+  </div>
+</div>
+<div class="panel-body">
+ <table class="table table-hover table-striped">
+  <thead>
+   <tr>
+    <th ng-hide="hide.adminContent">Facultad</th>
+    <th><b ng-click="ordenarPor('anio')">
+    Año</b></th>
+
+    <th><b class="hidden-xs" ng-click="ordenarPor('rut')">
+    Rut</b></th>
+
+    <th><b ng-click="ordenarPor('decano')">
+    Decano</b></th>
+
+    <th><b ng-click="ordenarPor('miembro1')">
+    Miembro Uno</b></th>
+    
+    <th><b ng-click="ordenarPor('miembro2')">
+    Miembro Dos</b></th>
+    <!--<th>fecha Pie</th>-->
+    <th><b ng-click="ordenarPor('estado')">
+    Estado</b></th>
+  </tr>
+</thead>
+<tbody>
+ <tr ng-repeat="comision in comisiones | orderBy:ordenSeleccionado | filter:buscar | pagination: curPage * pageSize | limitTo: pageSize" ng-click="seleccionar(comision, array.facultades[comision.cod_facultad])"> <!--con un solo filtro se buggea-->
+  <td ng-hide="hide.adminContent">{{array.facultades[comision.cod_facultad]}}</td>
+  <td>{{comision.anio}}</td>
+  <td class="hidden-xs">{{comision.rut}}</td>
+  <td>{{comision.decano}}</td>
+  <td>{{comision.miembro1}}</td>
+  <td>{{comision.miembro2}}</td>
+  <!--<td>{{comision.fechaPie | date: "dd-MM-yyyy"}}</td>-->
+  <td>{{comision.estado}}</td>
+</tr>
+</tbody>
+</table>
+<img class="spin" src="images/spinner.gif" ng-show="showSpinner">
+</div>
+</div>
+   <!-- <div>
+      <table st-table="tabla" class="table table-striped">
+        <thead>
+          
+          <tr>
+            <th>facultad</th>
+            <th>año</th>
+            <th>rut</th>
+            <th>decano</th>
+            <th>miembro1</th>
+            <th>miembro2</th>
+            <th>fecha Pie</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="comision in comisiones">
+            <td>{{comision.facultad}}</td>
+            <td>{{comision.anio}}</td>
+            <td>{{comision.rut}}</td>
+            <td>{{comision.decano}}</td>
+            <td>{{comision.miembro1}}</td>
+            <td>{{comision.miembro2}}</td>
+            <td>{{comision.fechaPie}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>-->
+
+   <!-- <div class="pagination-div" ng-show="comisiones.length>5" style="text-align: center">
+     <ul>
+
+      <button class="btn btn-default btn-sm" ng-disabled="curPage == 0"
+      ng-click="curPage=curPage-1"> left </button>
+
+      <span>Página {{curPage + 1}} de {{ numberOfPages() }}</span>
+
+      <button class="btn btn-default btn-sm"
+      ng-disabled="curPage >= comisiones.length/pageSize - 1"
+      ng-click="curPage = curPage+1"> rite </button>
+
+    </ul>
+  </div>-->
+
+  <div class="pagination-div" ng-show="comisiones.length>5" style="text-align: center">
+    <ul>
+      <button class="btn btn-default btn-sm" ng-disabled="curPage == 0"
+      ng-click="curPage=0"> <span class="glyphicon glyphicon-step-backward"></span> </button>
+
+      <button class="btn btn-default btn-sm" ng-disabled="curPage == 0"
+      ng-click="curPage=curPage-1"> <span class="glyphicon glyphicon-triangle-left"></span> </button>
+
+      <span>Página {{curPage + 1}} de {{ numberOfPages() }}</span>
+
+      <button class="btn btn-default btn-sm"
+      ng-disabled="curPage >= comisiones.length/pageSize - 1"
+      ng-click="curPage = curPage+1"> <span class="glyphicon glyphicon-triangle-right"></span> </button>
+
+      <button class="btn btn-default btn-sm" ng-disabled="curPage == numberOfPages()-1"
+      ng-click="curPage=numberOfPages()-1"> <span class="glyphicon glyphicon-step-forward"></span> </button>
+
+    </ul>
+  </div>
+</nav>
+
+
+
+

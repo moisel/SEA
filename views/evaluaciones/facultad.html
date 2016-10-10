@@ -1,0 +1,112 @@
+
+<div class="panel" ng-class="{'panel-danger': alertaSinComisiones && !showSpinnerComisiones, 'panel-default': showSpinnerComisiones || !alertaSinComisiones }">
+	<div class="panel-heading">Comisiones Disponibles</div>
+	<div class="panel-body">
+		<b ng-hide="alertaSinComisiones">Trabajar con:</b>
+
+		<div ng-hide="hideRadios" ng-repeat="comision in comisiones">
+			<td ><input type="radio" ng-model="$parent.selected" value="{{comision}}" ng-change="seleccionarComision(comision)"></td>
+			<span><b>Año:</b> {{comision.anio}}</span>
+			<span><b>Rut:</b> {{comision.rut}}</span>
+			<span><b>Decano:</b> {{comision.decano}}</span>
+			<span><b>Miembro uno:</b> {{comision.miembro1}}</span>
+			<span><b>Miembro dos:</b> {{comision.miembro2}}</span>
+		</div>
+		<div ng-show="hideRadios"><!--si hay una sola, se selecciona, por lo que provienen del datafactory-->
+			<span><b>Año:</b> {{datafactoryComision.anio}}</span>
+			<span><b>Rut:</b> {{datafactoryComision.rut}}</span>
+			<span><b>Decano:</b> {{datafactoryComision.decano}}</span>
+			<span><b>Miembro uno:</b> {{datafactoryComision.miembro1}}</span>
+			<span><b>Miembro dos:</b> {{datafactoryComision.miembro2}}</span>
+		</div>
+		<b ng-show="alertaSinComisiones && !showSpinnerComisiones">No Existen Comisiones Configuradas Para esta Facultad</b>
+		<img class="spin" src="images/spinner.gif" ng-show="showSpinnerComisiones">
+
+	</div>
+</div>
+
+<nav class="navbar navbar-default" role="navigation">
+	<div class="navbar-header">
+		<a class="navbar-brand">Academicos Disponibles</a>
+	</div>
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-academicos">
+		<ul class="nav navbar-nav">
+			<li><a href="" ng-click="reloadAcademicos()"><span class="glyphicon glyphicon-refresh"></span> Refrscar</a></li>
+		</ul>
+	</div><!-- /.navbar-collapse -->
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+				<input type="text" class="form-control" placeholder="Buscar Academico" ng-model="buscar" ng-click="curPage=0">
+			</div>
+		</div><!--panel-heading-->
+		<div class="panel-body">
+			<table class="table table-hover table-striped">
+				<thead>
+					<tr>
+						<th><b ng-click="ordenarPor('rut')">Rut</b></th>
+
+						<th><b ng-click="ordenarPor('nombres')">Nombre(s)</b></th>
+
+						<th><b ng-click="ordenarPor('apellidos')">Apellido(s)</b></th>
+
+						<th><b ng-click="ordenarPor('cod_facultad')">Facultad</b></th>
+
+						<th><b ng-click="ordenarPor('cod_departamento')">Departamento</b></th>
+
+						<th><b ng-click="ordenarPor('tituloprofesional')">Título Profesional</b></th>
+
+						<!--<th><b ng-click="ordenarPor('horas')">Horas</b></th>-->
+
+						<!--<th><b ng-click="ordenarPor('categoria')">Categoría</b></th>-->
+
+						<th><b ng-click="ordenarPor('estado')">Estado</b></th>
+
+						<th><b>Evaluar</b></th>
+						<!--<th><b>Editar</b></th>-->
+						<!--<th><b>Ult.Ev</b></th>-->
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="academico in academicos | orderBy:ordenSeleccionado | filter:buscar | pagination: curPage * pageSize | limitTo: pageSize">
+						<td>{{academico.rut | rut}}</td>
+						<td>{{academico.nombres}}</td>
+						<td>{{academico.apellidos}}</td>
+						<td>{{array.facultades[academico.cod_facultad]}}</td>
+						<td class="hidden-xs">{{array.departamentos[academico.cod_departamento]}}</td>
+						<td>{{academico.tituloProfesional}}</td>
+						<!--<td>{{academico.horas}}</td>-->
+						<!--<td>{{academico.categoria}}</td>-->
+						<td>{{academico.estado}}</td>
+						<td><button ng-disabled="showSpinnerAcademicos" class="btn btn-default" ng-click="evaluar(academico)"><span class="glyphicon glyphicon-check"></span></button></td>
+						<!--<td><button ng-disabled="showSpinnerAcademicos" class="btn btn-default" ng-click="editar(academico)"><span class="glyphicon glyphicon-edit"></span></button></td>-->
+						<!--<td><button class="btn btn-default" ng-click="asPDF(academico)"><span class="glyphicon glyphicon-paste"></span></button></td>-->
+					</tr>
+				</tbody>
+			</table>
+			<img class="spin" src="images/spinner.gif" ng-show="showSpinnerAcademicos">
+		</div>
+	</div><!--panel panel default-->
+
+	<div class="pagination-div" ng-show="academicos.length>5" style="text-align: center">
+		<ul>
+			<button class="btn btn-default btn-sm" ng-disabled="curPage == 0"
+			ng-click="curPage=0"> <span class="glyphicon glyphicon-step-backward"></span> </button>
+
+			<button class="btn btn-default btn-sm" ng-disabled="curPage == 0"
+			ng-click="curPage=curPage-1"> <span class="glyphicon glyphicon-triangle-left"></span> </button>
+
+			<span>Página {{curPage + 1}} de {{ numberOfPages() }}</span>
+
+			<button class="btn btn-default btn-sm"
+			ng-disabled="curPage >= academicos.length/pageSize - 1"
+			ng-click="curPage = curPage+1"> <span class="glyphicon glyphicon-triangle-right"></span> </button>
+
+			<button class="btn btn-default btn-sm" ng-disabled="curPage == numberOfPages()-1"
+			ng-click="curPage=numberOfPages()-1"> <span class="glyphicon glyphicon-step-forward"></span> </button>
+
+		</ul>
+	</div>
+</nav>

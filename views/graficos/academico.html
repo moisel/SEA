@@ -1,0 +1,21 @@
+<div class="row">
+<!--COMBBOX DE PERIODOS-->
+	<div class="col-md-2">
+		<label class="label-white" for="SelectPeriodo">Periodos</label>
+		<div class="input-group">
+			<span class="input-group-addon"><span class="glyphicon glyphicon-adjust"></span></span>
+			<select id="SelectPeriodo" class="form-control" ng-model="periodo" ng-options="periodo for periodo in periodosSeleccion"
+			ng-change="reloadChartData()">
+		</select>
+	</div>
+</div>
+<!--FIN COMBOBOX DE PERIODOS-->
+</div>
+
+<img class="spin" src="images/spinner.gif" ng-show="sending">
+<nvd3 options="options1" data="data1"></nvd3>
+<div class="chart-explain">{{explain}}</div>
+
+<img class="spin" src="images/spinner.gif" ng-show="sending">
+<nvd3 options="options2" data="data2"></nvd3>
+<div class="chart-explain">Evaluaciones Finales Históricas</div>

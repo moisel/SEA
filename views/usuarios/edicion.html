@@ -1,0 +1,67 @@
+<!--
+*HTML
+*Usuarios 
+*Edición
+-->
+<form class="form-crud" role="form" name="forma">
+	<div class="form-title">Editar Usuario: {{datafactory.email}}</div>
+	<div class="row">
+		<div class="col-md-6" ng-class="{'has-error': forma.nombreUsuario.$invalid && !forma.nombreUsuario.$pristine }">
+			<label for="inputNombre">Nombre</label>
+			<div class="input-group">
+				<input ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ]*$/" id="inputNombre" ng-maxlength="25" type="text" class="form-control" placeholder="Nombre" name="nombreUsuario" ng-model="datafactory.nombre" required>
+				<span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+			</div>
+			<b ng-show="forma.nombreUsuario.$invalid && !forma.nombreUsuario.$pristine && !forma.nombreUsuario.$error.pattern" class="help-block">El campo Nombre es oblgatorio.</b>
+			<b ng-show="forma.nombreUsuario.$error.pattern" class="help-block" >El campo Nombre contiene caracteres inválidos</b>
+		</div>
+
+		<div class="col-md-6" ng-class="{'has-error': forma.apellidosUsuario.$invalid && !forma.apellidosUsuario.$pristine }">
+			<label for="inputApellidos">Apellidos</label>
+			<div class="input-group">
+				<input ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ]*$/" id="inputApellidos" ng-maxlength="25" type="text" class="form-control" placeholder="Apellidos" name="apellidosUsuario" ng-model="datafactory.apellidos"
+				required>
+				<span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+			</div>
+			<p ng-show="forma.apellidosUsuario.$invalid && !forma.apellidosUsuario.$pristine && !forma.apellidosUsuario.$error.pattern" class="help-block">El campo Apellidos es oblgatorio.</p>
+			<b ng-show="forma.apellidosUsuario.$error.pattern" class="help-block" >El campo Apellidos contiene caracteres inválidos</b>
+		</div>
+	</div><!--row-->
+	<div class="row">
+
+		<div class="col-md-3" ng-class="{'has-error': forma.rutUsuario.$invalid && !forma.rutUsuario.$pristine }">
+			<label for="inputRut">Rut</label>
+				<input ng-pattern="/^[0-9kK\.-]*$/" id="inputRut" ng-maxlength="20" type="text" class="form-control" placeholder="Rut" name="rutUsuario" ng-model="datafactory.rut">
+			<b ng-show="forma.rutUsuario.$error.pattern" class="help-block" >El campo Rut contiene caracteres inválidos</b>
+		</div>
+
+
+		<div class="col-md-3">
+			<label for="inputPermiso">Permiso</label>
+			<div class="input-group">
+				<span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
+				<select class="form-control" id="estado" ng-model="datafactory.permiso" ng-options="permiso for permiso in permisos"></select>
+			</div> 
+		</div>
+		<div ng-hide="hide.adminContent" class="col-md-6">
+			<label class="label-white" for="selectFacultad">Facultad</label>
+			<div class="input-group">
+				<span class="input-group-addon"><span class="glyphicon glyphicon-adjust"></span></span>
+				<select name="facultadSelect" id="selectFacultad" class="form-control"  ng-model="changer.facultad" ng-options="facultad for facultad in facultadesSeleccion" ng-change="cambiarCodFacultad(changer.facultad)">
+				</select>
+			</div>
+		</div>
+	</div><!--row-->
+	<div class="row">
+		<div class="col-md-2">
+			<label for="InputEstado">Estado</label>
+			<div class="input-group">
+				<span class="input-group-addon"><span class="glyphicon glyphicon-adjust"></span></span>
+				<select class="form-control" id="estado" ng-model="datafactory.estado" ng-options="estado for estado in estados"></select>
+			</div>
+		</div>
+	</div><!--row-->
+	<ed-guardar></ed-guardar>
+	<img class="spin" src="images/spinner.gif" ng-show="sending">
+</form>
+

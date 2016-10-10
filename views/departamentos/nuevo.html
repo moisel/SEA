@@ -1,0 +1,34 @@
+
+<!--
+*HTML
+*Departamentos 
+*Nuevo
+-->
+<form class="form-crud" role="form" name="forma">
+	<div class="form-title">Nuevo Departamento</div>
+	<div class="row">
+		<div class="col-md-8" ng-class="{'has-error': forma.anioComision.$invalid && !forma.anioComision.$pristine }">
+			<label for="inputNombre">Nombre</label>
+			<div class="input-group">
+				<input ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ]*$/" id="inputNombre" ng-maxlength="60" type="text" class="form-control" placeholder="Nombre del departamento" name="anioComision" ng-model="departamento.nombre" required>
+				<span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+			</div>
+			<b ng-show="forma.anioComision.$invalid && !forma.anioComision.$pristine && !forma.anioComision.$error.pattern" class="help-block">El campo Nombre es oblgatorio.</b>
+			<b ng-show="forma.anioComision.$error.pattern" class="help-block">El campo Nombre contiene caracteres inválidos</b>
+		</div>
+	</div><!--row-->
+	<div class="row">
+		<div ng-hide="hide.adminContent" class="col-md-8">
+			<label class="label-white" for="selectFacultad">Facultad</label>
+			<div class="input-group">
+				<span class="input-group-addon"><span class="glyphicon glyphicon-adjust"></span></span>
+				<select name="facultadDepartamento" id="selectFacultad" ng-model="changer.facultad" class="form-control" ng-options="facultad for facultad in facultadesSeleccion" ng-change="cambiarCodFacultad(changer.facultad)">
+				</select>
+			</div>
+		</div>
+	</div><!--row-->
+
+	<ed-agregar></ed-agregar>
+	<img class="spin" src="images/spinner.gif" ng-show="sending">
+	
+</form>

@@ -1,0 +1,95 @@
+<!--
+*HTML
+*Usuarios 
+*Edición
+-->
+<form class="form-crud" role="form" name="forma">
+	<div class="form-title">Editar Perfil: {{usuario.nombre}} {{usuario.apellidos}}</div>
+
+	<div class="row">
+
+		<div class="col-md-12" ng-class="{'has-error': forma.passUsuario.$invalid && !forma.passUsuario.$pristine }">
+			<div class="form-group">
+				<label for="inputPass1">Contraseña</label>
+				<div class="input-group">
+					<input name="passUsuario" ng-pattern="/^[a-zA-Z0-9 ñáéíóúÑÁÉÍÓÚ]*$/" id="inputPass1" ng-maxlength="25" type="password" class="form-control" placeholder="Contraseña" ng-model="usuario.pass" required>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+				</div>
+				<p ng-show="forma.passUsuario.$invalid && !forma.passUsuario.$pristine && !forma.passUsuario.$error.pattern" class="help-block">El campo Contraseña es oblgatorio.</p>
+				<b ng-show="forma.passUsuario.$error.pattern" class="help-block">El campo Contraseña contiene caracteres inválidos</b>
+			</div>
+		</div>
+
+	</div>
+	<div class="row">
+
+		<div class="col-md-6" ng-class="{'has-error': forma.nuevaPassUsuario.$invalid && !forma.nuevaPassUsuario.$pristine,
+		'has-success': forma.confirmPassword.$valid && forma.nuevaPassUsuario.$dirty}">
+		<div class="form-group">
+			<label for="inputPass2">Nueva Contraseña</label>
+			<input class="form-control" name="nuevaPassUsuario" ng-pattern="/^[a-zA-Z0-9 ñáéíóúÑÁÉÍÓÚ]*$/" id="inputPass2" ng-maxlength="25" type="password" placeholder="Nueva Contraseña" ng-model="usuario.nuevaPass">
+			<b ng-show="forma.nuevaPassUsuario.$error.pattern" class="help-block">El campo Nueva Contraseña contiene caracteres inválidos</b>
+		</div>
+	</div>
+
+	<div class="col-md-6" ng-class="{'has-error': forma.confirmPassword.$invalid && !forma.confirmPassword.$pristine,
+	'has-success': forma.confirmPassword.$valid && forma.confirmPassword.$dirty}">
+	<div class="form-group">
+		<label for="inputPass3">Repetir Contraseña</label>
+		<input ng-pattern="/^[a-zA-Z0-9 ñáéíóúÑÁÉÍÓÚ]*$/" id = "inputPass3"type="password" name="confirmPassword"
+		class="form-control" 
+		ng-model="usuario.nuevaPass2" 
+		placeholder="Repetir Contraseña"
+		compare-to="usuario.nuevaPass" >
+	</div>
+</div>
+
+</div>
+<div class="row">
+
+	<div class="col-md-6" ng-class="{'has-error': forma.nombreUsuario.$invalid && !forma.nombreUsuario.$pristine }">
+		<label for="inputNombre">Nombre</label>
+		<div class="input-group">
+			<input name="nombreUsuario" ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ]*$/" id="inputNombre" ng-maxlength="25" type="text" class="form-control" placeholder="Nombre" ng-model="usuario.nombre" required>
+			<span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+		</div>
+		<p ng-show="forma.nombreUsuario.$invalid && !forma.nombreUsuario.$pristine && !forma.nombreUsuario.$error.pattern" class="help-block">El campo Nombre es oblgatorio.</p>
+		<b ng-show="forma.nombreUsuario.$error.pattern" class="help-block">El campo Contraseña contiene caracteres inválidos</b>
+	</div>
+
+	<div class="col-md-6" ng-class="{'has-error': forma.apellidosUsuario.$invalid && !forma.apellidosUsuario.$pristine }">
+		<label for="inputApellidos">Apellidos</label>
+		<div class="input-group">
+			<input name="apellidosUsuario" ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ]*$/" id="inputApellidos" ng-maxlength="25" type="text" class="form-control" placeholder="Apellidos" ng-model="usuario.apellidos" required>
+			<span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+		</div>
+		<p ng-show="forma.apellidosUsuario.$invalid && !forma.apellidosUsuario.$pristine && !forma.apellidosUsuario.$error.pattern" class="help-block">El campo Apellidos es oblgatorio.</p>
+		<b ng-show="forma.apellidosUsuario.$error.pattern" class="help-block">El campo Apellidos contiene caracteres inválidos</b>
+	</div>
+
+</div>
+<div class="row">
+
+	<div class="col-md-6" ng-class="{'has-error': forma.rutUsuario.$invalid && !forma.rutUsuario.$pristine }">
+		<div class="form-group">
+			<label for="inputRut">Rut</label>
+			<input class="form-control" ng-pattern="/^[0-9kK\.-]*$/" id="inputRut" ng-maxlength="20" type="text" placeholder="Rut" name="rutUsuario" ng-model="usuario.rut">
+			<b ng-show="forma.rutUsuario.$error.pattern" class="help-block">El campo Rut contiene caracteres inválidos</b>
+		</div>
+	</div>
+
+	<div class="col-md-6" ng-class="{'has-error': forma.emailUsuario.$invalid && forma.emailUsuario.$dirty, 'has-success': forma.emailUsuario.$valid && forma.emailUsuario.$dirty}">
+		<label for="inputEmail">Email</label>
+		<input id="inputEmail" type="email" class="form-control" placeholder="email" name="emailUsuario" ng-model="usuario.email">
+		<div ng-show="forma.emailUsuario.$dirty && forma.emailUsuario.$invalid">
+			<p class="help-block text-danger" ng-show="forma.emailUsuario.$error.email"></p>
+		</div>
+	</div>
+
+</div>
+
+<h2>Al Cambiar el Correo, se le pedirá ingresar nuevamente al sistema</h2>
+<button class="btn btn-success" ng-disabled="forma.$invalid" ng-click="actualizarPerfil()" >Guardar</button>
+
+</form>
+

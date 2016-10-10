@@ -1,0 +1,225 @@
+<!doctype html>
+<html class="no-js">
+<head>
+
+
+
+  <meta charset="utf-8">
+  <title>SEA</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <script src="bower_components/angular/angular.js"></script>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/nvd3/src/nv.d3.css" />
+  <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+</head>
+<body ng-cloak ng-app="seaApp">
+  <!--<body ng-cloak ng-app="seaApp">-->
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <![endif]-->
+
+      <!-- Add your site or application content here -->
+      <!--<nav id= "menu" class="navbar navbar-default transparente" role="navigation">-->
+      <div ng-controller="MainCtrl">
+        <div id="menuBackground">
+          <img class="img-logo" src="images/logo_ucm-blanco_01.gif" alt="Logo UCM">
+          <nav id="menu" class="navbar navbar-default navbar-menu" role="navigation" ng-hide="hide.mainContent">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-index">
+                <span class="sr-only">Desplegar navegacion</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-navbar-collapse-index">
+              <ul class="nav navbar-nav">
+                <li class="my-menu"><a href="#/graficos/facultades">Gráficos</a></li>
+                <li class="my-menu" ng-hide="hide.adminContent"><a href="#/facultades/main">Facultades</a></li>
+                <li class="my-menu" ng-hide="hide.adminContent"><a href="#/departamentos/main">Departamentos</a></li>
+                <li class="my-menu"><a href="#/comisiones/main">Comisiones</a></li>
+                <li class="my-menu"><a href="#/academicos/main">Académicos</a></li>
+                <li class="my-menu"><a href="#/evaluaciones/facultades">Evaluar</a></li>
+                <li class="my-menu"><a href="#/reportes/facultades">Reportes</a></li>
+                <li class="my-menu" ng-hide="hide.adminContent"><a href="#/usuarios/main">Usuarios</a></li>
+                <li class="my-menu" ng-hide="hide.adminContent"><a href="#/configuraciones/main">Periodos</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="my-menu dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><a>
+                  {{user.email}}<span class="caret"></span>
+                </a></li>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li><a href="#/usuarios/perfil">Perfil</a></li>
+                  <li><a ng-click="logout()">Salir</a></li>
+                </ul>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </nav>
+        </div><!--menuBackground-->
+        <!--<img class="img-logo" src="images/logo_UCM_oficial_05.jpg" alt="Logo UCM">-->
+        
+        <!--LOGINFORM-->
+        <div ng-hide="!hide.mainContent" class="col-md-offset-5 col-md-3 container">
+          <form role="form" name="forma">
+            <div class="form-login">
+              <h4>Bievenido a SEA</h4>
+              <div  ng-class="{'has-error': forma.loginCorreo.$invalid && forma.loginCorreo.$dirty, 'has-success': forma.loginCorreo.$valid && forma.loginCorreo.$dirty}">
+                  <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                    <input type="email" name="loginCorreo" class="form-control" placeholder="Correo" ng-model="user.email">
+                  </div>
+                  <!--<b ng-show="forma.loginCorreo.$error.email" class="help-block"> inválidos </b>-->
+              </div>
+
+                  <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input ng-pattern="/^[a-zA-Z0-9 ñáéíóúÑÁÉÍÓÚ]*$/" type="password" name="loginPass" class="form-control" placeholder="Contraseña" ng-model="user.pass">
+                  </div>
+                  <b ng-show="forma.loginPass.$error.pattern">Caracteres Inválidos</b>
+                
+
+              <img class="spin" src="images/mainSpinner.gif" ng-show="showMainSpinner">
+              <!--<div class="spinner" ng-show="showMainSpinner"></div>-->
+
+              <p>{{mensajeParaUsuario}}</p>
+              <button class="btn btn-primary btn-md" ng-disabled="forma.$invalid || showMainSpinner" ng-click="login(user)"><span class="glyphicon glyphicon-log-in"></span> Ingresar</button>
+
+            </div>
+
+          </form>
+        </div>
+
+
+        <div  ng-hide="hide.mainContent" class="container">
+          <div ng-view="">
+
+          </div>
+        </div>
+
+
+<!--Tests
+<a href="http://evalua2.esy.es/test.php?archivo=test.png">Descargar</a>
+<input type="file" file-model="myFile"/>
+<button ng-click="uploadFile()">upload me</button>-->
+
+
+
+
+
+
+<div class="footer" ng-hide="hide.mainContent">
+  <p>© Universidad Católica del Maule - Departamento de Comunicaciones</p> 
+  <p>Casa Central Avda. San Miguel 3605, Talca. Teléfono (56) (71) 2-203 100</p> 
+  <p>Campus Nuestra Señora del Carmen, Curicó Teléfono (56) (75) 2203 100</p>
+  <p>Campus San Isidro, Curicó Teléfono (56) (75) 2203 583</p>
+  <p>ucm_comunica@ucm.cl - Talca, Chile - Versión 10 de Mayo de 2012</p>
+</div>
+</div><!--mainCtrl-->
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+<script>
+ !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+   (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+   r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+ }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ ga('create', 'UA-XXXXX-X');
+ ga('send', 'pageview');
+</script>
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<!--<script src="bower_components/angular/angular.js"></script>-->
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/jspdf/dist/jspdf.min.js"></script>
+<script src="bower_components/angular-rut/dist/angular-rut.min.js"></script>
+<script src="bower_components/file-saver.js/FileSaver.js"></script>
+<script src="bower_components/d3/d3.js"></script>
+<script src="bower_components/nvd3/nv.d3.js"></script>
+<script src="bower_components/angular-nvd3/dist/angular-nvd3.min.js"></script>
+<script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
+<script src="bower_components/angular-h-sweetalert/dist/ngSweetAlert.js"></script>
+<script src="bower_components/angular-h-sweetalert/dist/ngSweetAlert.min.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/main.js"></script>
+<script src="scripts/controllers/academicos/main.js"></script>
+<script src="scripts/filters/pagination.js"></script>
+<script src="scripts/services/academico.js"></script>
+<script src="scripts/services/routechanger.js"></script>
+<script src="scripts/controllers/academicos/nuevo.js"></script>
+<script src="scripts/controllers/academicos/edicion.js"></script>
+<script src="scripts/controllers/evaluaciones/evaluacion.js"></script>
+<script src="scripts/controllers/comisiones/main.js"></script>
+<script src="scripts/services/comision.js"></script>
+<script src="scripts/controllers/comisiones/nuevo.js"></script>
+<script src="scripts/controllers/comisiones/edicion.js"></script>
+<script src="scripts/controllers/facultades/main.js"></script>
+<script src="scripts/services/facultad.js"></script>
+<script src="scripts/controllers/facultades/nuevo.js"></script>
+<script src="scripts/controllers/facultades/edicion.js"></script>
+<script src="scripts/controllers/departamentos/main.js"></script>
+<script src="scripts/controllers/departamentos/nuevo.js"></script>
+<script src="scripts/services/departamento.js"></script>
+<script src="scripts/controllers/departamentos/edicion.js"></script>
+<script src="scripts/controllers/usuarios/main.js"></script>
+<script src="scripts/services/usuario.js"></script>
+<script src="scripts/controllers/usuarios/nuevo.js"></script>
+<script src="scripts/controllers/usuarios/edicion.js"></script>
+<script src="scripts/controllers/configuraciones/main.js"></script>
+<script src="scripts/directives/disablearrows.js"></script>
+<script src="scripts/directives/inputnumber.js"></script>
+<script src="scripts/services/loginservice.js"></script>
+<script src="scripts/services/sessionservice.js"></script>
+<script src="scripts/services/configservice.js"></script>
+<script src="scripts/controllers/evaluaciones/facultades.js"></script>
+<script src="scripts/controllers/evaluaciones/facultad.js"></script>
+<script src="scripts/services/periodoservice.js"></script>
+<script src="scripts/controllers/evaluaciones/terminado.js"></script>
+<script src="scripts/services/hidefactory.js"></script>
+<script src="scripts/controllers/reportes/facultades.js"></script>
+<script src="scripts/controllers/reportes/facultad.js"></script>
+<script src="scripts/filters/newlines.js"></script>
+<script src="scripts/controllers/usuarios/perfil.js"></script>
+<script src="scripts/directives/compareto.js"></script>
+<script src="scripts/controllers/evaluaciones/edicion.js"></script>
+<script src="scripts/directives/edpagination.js"></script>
+<script src="scripts/services/fileupload.js"></script>
+<script src="scripts/directives/filemodel.js"></script>
+<script src="scripts/controllers/graficos/facultad.js"></script>
+<script src="scripts/controllers/graficos/facultades.js"></script>
+<script src="scripts/services/comboloader.js"></script>
+<script src="scripts/services/htp.js"></script>
+<script src="scripts/services/periodo.js"></script>
+<script src="scripts/controllers/graficos/academico.js"></script>
+<script src="scripts/services/alerts.js"></script>
+<script src="scripts/services/evatools.js"></script>
+<script src="scripts/services/evafasteners.js"></script>
+<script src="scripts/services/sha1.js"></script>
+<script src="scripts/directives/edguardar.js"></script>
+<script src="scripts/directives/edagregar.js"></script>
+<!-- endbuild -->
+</body>
+</html>

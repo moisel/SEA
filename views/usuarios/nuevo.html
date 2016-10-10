@@ -1,0 +1,73 @@
+
+<!--
+*HTML
+*Usuarios 
+*Nuevo
+-->
+<form class="form-crud" role="form" name="forma">
+<div class="form-title">Nuevo Usuario</div>
+	<div class="row">
+		<div class="col-md-6" ng-class="{'has-error': forma.nombreUsuario.$invalid && !forma.nombreUsuario.$pristine }">
+			<label for="inputNombre">Nombre</label>
+			<div class="input-group">
+				<input ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ]*$/" id="inputNombre" ng-maxlength="25" type="text" class="form-control" placeholder="Nombre" name="nombreUsuario" ng-model="usuario.nombre" required>
+				<span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+			</div>
+			<b ng-show="forma.nombreUsuario.$invalid && !forma.nombreUsuario.$pristine && !forma.nombreUsuario.$error.pattern" class="help-block">El campo Nombre es oblgatorio.</b>
+			<b ng-show="forma.nombreUsuario.$error.pattern" class="help-block" >El campo Nombre contiene caracteres inválidos</b>
+		</div>
+
+		<div class="col-md-6" ng-class="{'has-error': forma.apellidosUsuario.$invalid && !forma.apellidosUsuario.$pristine }">
+			<label for="inputApellidos">Apellidos</label>
+			<div class="input-group">
+				<input ng-pattern="/^[a-zA-Z ñáéíóúÑÁÉÍÓÚ]*$/" id="inputApellidos" ng-maxlength="25" type="text" class="form-control" placeholder="Apellidos" name="apellidosUsuario" ng-model="usuario.apellidos"
+				required>
+				<span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+			</div>
+			<p ng-show="forma.apellidosUsuario.$invalid && !forma.apellidosUsuario.$pristine && !forma.apellidosUsuario.$error.pattern" class="help-block">El campo Apellidos es oblgatorio.</p>
+			<b ng-show="forma.apellidosUsuario.$error.pattern" class="help-block" >El campo Apellidos contiene caracteres inválidos</b>
+		</div>
+		
+	</div><!--row-->
+	<div class="row">
+
+		<div class="col-md-3" ng-class="{'has-error': forma.rutUsuario.$invalid && !forma.rutUsuario.$pristine }">
+			<label for="inputRut">Rut</label>
+				<input ng-pattern="/^[0-9kK\.-]*$/" id="inputRut" ng-maxlength="20" type="text" class="form-control" placeholder="Rut" name="rutUsuario" ng-model="usuario.rut">
+			<b ng-show="forma.rutUsuario.$error.pattern" class="help-block" >El campo Rut contiene caracteres inválidos</b>
+		</div>
+
+
+		<div class="col-md-3">
+			<label for="inputPermiso">Permiso</label>
+				<select class="form-control" id="estado" ng-model="usuario.permiso" ng-options="permiso for permiso in permisos"></select>
+		</div>
+
+		<div class="col-md-6" ng-class="{'has-error': forma.emailUsuario.$invalid && forma.emailUsuario.$dirty, 'has-success': forma.emailUsuario.$valid && forma.emailUsuario.$dirty}">
+			<label for="inputEmail">Email</label>
+			<div class="input-group">
+				<input ng-pattern="/^[a-zA-Z0-9ñáéíóúÑÁÉÍÓÚ.-_@]*$/" id="inputEmail" type="email" class="form-control" placeholder="email" name="emailUsuario" ng-model="usuario.email" required>
+				<span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+				</div>
+			<div ng-show="forma.emailUsuario.$dirty && forma.emailUsuario.$invalid">
+			<p class="help-block text-danger" ng-show="forma.emailUsuario.$error.email"></p>
+			</div>
+		</div>
+		
+
+	</div><!--row-->
+	<div class="row">
+		<div ng-hide="hide.adminContent" class="col-md-8">
+			<label class="label-white" for="selectFacultad">Facultad</label>
+			<div class="input-group">
+				<span class="input-group-addon"><span class="glyphicon glyphicon-adjust"></span></span>
+				<select name="facultadDepartamento" id="selectFacultad" ng-model="changer.facultad" class="form-control" ng-options="facultad for facultad in facultadesSeleccion" ng-change="cambiarCodFacultad(changer.facultad)">
+				</select>
+			</div>
+		</div>
+
+	</div><!--row-->
+  	<ed-agregar></ed-agregar>
+	<img class="spin" src="images/spinner.gif" ng-show="sending">
+  </form>
+
